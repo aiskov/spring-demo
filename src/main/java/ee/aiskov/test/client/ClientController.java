@@ -36,7 +36,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @Api
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "clients", produces = APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = "api/v1/clients", produces = APPLICATION_JSON_UTF8_VALUE)
 public class ClientController extends BaseController {
     private final DeleteClientCase deleteClientCase;
     private final AddClientCase addClientCase;

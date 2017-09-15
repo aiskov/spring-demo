@@ -1,17 +1,39 @@
-mysql:
-  image: mysql:5.6
-  environment:
-    MYSQL_ROOT_PASSWORD: toor
-    MYSQL_DATABASE: app
-  volumes:
-    - ../../src/test/resources/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
-    - ../../src/test/resources/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
-  ports:
-    - "7306:3306" # MySQL connection port
+version: '3'
 
-nginx:
-  image: nginx
-  volumes:
-    - ../../web:/usr/share/nginx/html
-  ports:
-    - "7080:80" # Web Client
+services:
+  db:
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: app
+    volumes:
+      - ../../src/test/resources/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ../../src/test/resources/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+    expose:
+      - "3306" # MySQL connection port
+
+  backend:
+    image: ee.aiskov/test:latest
+    environment:
+      - JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+      - RUN_OPTS=--spring.config.location=file:/env.properties
+    links:
+      - db
+    volumes:
+      - ./env.properties:/env.properties
+    expose:
+      - "80" # REST Api, Monitoring Api & Swagger
+      - "5005" # Application debug port
+    ports:
+      - "8989:80"
+      - "5005:5005"
+      - "7081:80"
+
+  frontend:
+    image: nginx
+    volumes:
+      - ../../web:/usr/share/nginx/html
+    expose:
+      - "80" # Web Client
+    ports:
+      - "7080:80"
