@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="testApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+
+    <script>
+        angular.module('testApp', []).controller('TestController', function($http) {
+            $http.get('/test').then(
+                function(response) {
+                    console.log(response.data);
+                    this.client = response.data;
+                },
+                function(response) {
+                    console.log(response.data);
+                    alert('Request failed');
+                }
+            );
+        });
+    </script>
+
+</head>
+<body>
+<div ng-controller="TestController as ctrl">
+    <p>{{ctrl.client.name}}</p>
+</div>
+</body>
+</html>

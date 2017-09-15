@@ -1,0 +1,17 @@
+mysql:
+  image: mysql:5.6
+  environment:
+    MYSQL_ROOT_PASSWORD: toor
+    MYSQL_DATABASE: app
+  volumes:
+    - ../../src/test/resources/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+    - ../../src/test/resources/database/data.sql:/docker-entrypoint-initdb.d/2-data.sql
+  ports:
+    - "7306:3306" # MySQL connection port
+
+nginx:
+  image: nginx
+  volumes:
+    - ../../web:/usr/share/nginx/html
+  ports:
+    - "7080:80" # Web Client
