@@ -17,7 +17,11 @@ In order to run infrastructure
 
 In order to run application server
 
+    mvn spring-boot::run
     
+In order to run tests
+
+    mvn verify
 
 Available Resources
 -------------------
