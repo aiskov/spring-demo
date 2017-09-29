@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<div th:fragment="logout" class="logout">
+    <div>
+        <form action="#" th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+            <!--
+            i21> Thymeleaf will automatically add the CSRF token to our logout form.
+            If we were not using Thymleaf or Spring MVCs taglib we could also manually add the CSRF token using
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>.
+            -->
+        </form>
+    </div>
+</div>
+<h1>Hello Spring Security i21</h1>
+<p>This is an unsecured page, but you can access the secured pages after authenticating.</p>
+<ul>
+    <li>Go to the <a href="/user/index" th:href="@{/user/index}">secured pages</a></li>
+</ul>
+</body>
+</html>
+
+

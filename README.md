@@ -37,6 +37,11 @@ Read logs
 
     docker logs demoapp_backend_1 -f 2>&1 | less
 
+    2nd way
+    docker exec -t -i demoapp_backend_1 /bin/sh
+    tail -f -n 10 application-debug.log
+    
+    
 Restart backend without rebuild (useful for changing local configuration `./env/develop/app/env.properties`)
 
     docker restart demoapp_backend_1

@@ -20,6 +20,10 @@ printf "Docker compose file: \e[4m${PROFILE}/${COMPOSE_FILE}\e[0m\n"
 cd ${PROFILE}
 
 printf "\e[1mStarting containers\e[0m\n"
+
+
+printf "PROFILE=${PROFILE}\nAPP_NAME=${APP_NAME}\nCOMPOSE_FILE=${COMPOSE_FILE}"
+sleep 30
 docker-compose -p ${APP_NAME} -f ${COMPOSE_FILE} up -d || { print_fail; exit 1; }
 
 printf "\n\e[1mApplication started!\e[0m\n"
