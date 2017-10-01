@@ -32,8 +32,20 @@ services:
   frontend:
     image: nginx
     volumes:
+      - ./nginx:/etc/nginx/conf.d
       - ../../web:/usr/share/nginx/html
+      - frontend-libs:/usr/share/nginx/libs
     expose:
       - "80" # Web Client
     ports:
       - "7080:80"
+
+  npm-install:
+    image: node
+    volumes:
+      - ../../package.json:/package.json
+      - frontend-libs:/node_modules
+    command: npm install --save
+
+volumes:
+  frontend-libs: # Frontend libraries installed by NPM

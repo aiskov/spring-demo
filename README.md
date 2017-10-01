@@ -19,6 +19,13 @@ Run application
 
     ./docker.run.sh 
 
+Keys available:
+
+* `--stop` - Stop containers
+* `--remove` - Remove old containers
+* `--recreate` - Remove containers and start again
+* `./docker.run.sh <profile> ` - Run environment as directory where compose config located `./env/<profile>/docker-compose.yml`
+
 Run unit and integration tests
 
     mvn verify
@@ -88,6 +95,13 @@ One of the aim of application to introduce good practices and approaches as:
 * Behaviour Driven Development
 * The twelve-factor app
 
+# Infrastructure
+
+* Docker & Docker-Compose - to package and run environment
+* Tomcat (Embedded in SpringBoot) - to process REST API calls
+* Nginx - to serve static frontend files
+* MySQL - main data base
+
 ### Backend
 
 * Spring MVC - Web framework
@@ -97,7 +111,6 @@ One of the aim of application to introduce good practices and approaches as:
 * Dozer - convert object
 * Actuator - monitoring and health check 
 * JPA/Hibernate - ORM, access to database
-* MySQL - main data base
 * ehcache - cache solution
 * Swagger - auto generation of documentation
 * jUnit - unit test runner
@@ -107,8 +120,7 @@ One of the aim of application to introduce good practices and approaches as:
 
 ### Frontend
 
-* Nginx - frontend server which serve static files and route (potentially distributes the load) backend request
+* NPM - As package manager for JS part
 * AngularJS v1.x - as tool for single page application implementation 
 * Bootstrap - for layout
-* Font Awesome - for graphics 
-* Bower - as package manager
+* Font Awesome - for graphics
