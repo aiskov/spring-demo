@@ -47,6 +47,18 @@ Read logs
 Restart backend without rebuild (useful for changing local configuration `./env/develop/app/env.properties`)
 
     docker restart demoapp_backend_1
+    
+### Verification 
+
+In project used one runner for Unit and Integration tests, practically it means that for test passing you should have 
+environment for Integration tests. This environment should not have any collision with development, and may be used at
+same time.
+
+    ./docker.run.sh test
+
+Then you are able to execute tests:
+
+    mvn clean test
 
 Available Resources
 -------------------
