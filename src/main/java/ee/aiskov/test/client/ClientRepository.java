@@ -8,11 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 @Transactional(readOnly = true)
 public interface ClientRepository extends PagingAndSortingRepository<Client, String>, JpaSpecificationExecutor<Client> {
 
     @Query("SELECT clients FROM Client clients WHERE clients.state = 'ACTIVE' ORDER BY clients.name")
     List<Client> findActive();
-
 }

@@ -36,6 +36,7 @@ do
         *)
             if [[ "${1}" != -* ]] ; then
                 PROFILE=env/${1}
+                APP_NAME=${APP_NAME}-${1}
             fi
             ;;
     esac
@@ -48,6 +49,7 @@ if [ ! -f "${PROFILE}/${COMPOSE_FILE}" ]; then
     exit 1
 fi
 
+printf "Application name : \e[4m${APP_NAME}\e[0m\n"
 printf "Docker compose file: \e[4m${PROFILE}/${COMPOSE_FILE}\e[0m\n"
 cd ${PROFILE}
 
